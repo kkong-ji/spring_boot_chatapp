@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+C:\Users\wisej\spring_project\spring_project_chatserver\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
