@@ -42,6 +42,7 @@ org.eclipse.egit.ui.IgnoredResourceForegroundColor=157,167,175
 org.eclipse.egit.ui.UncommittedChangeBackgroundColor=25,29,31
 org.eclipse.egit.ui.UncommittedChangeForegroundColor=216,220,223
 org.eclipse.jdt.ui.ColoredLabels.inherited=143,143,191
+org.eclipse.jdt.ui.ColoredLabels.match_highlight=73,83,90
 org.eclipse.jdt.ui.ColoredLabels.writeaccess_highlight=255,128,128
 org.eclipse.jdt.ui.Javadoc.backgroundColor=48,54,59
 org.eclipse.jdt.ui.Javadoc.foregroundColor=235,237,239
@@ -100,6 +101,7 @@ org.eclipse.pde.genericeditor.extension.editor.color.quote=118,200,244
 org.eclipse.pde.genericeditor.extension.editor.color.tag=86,156,214
 org.eclipse.pde.genericeditor.extension.editor.color.text=207,212,216
 org.eclipse.search.ui.match.highlight=73,83,90
+org.eclipse.ui.commands=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<org.eclipse.ui.commands/>
 org.eclipse.ui.editors.backgroundColor=0,0,0
 org.eclipse.ui.editors.currentLineColor=7,8,8
 org.eclipse.ui.editors.findScope=62,70,76
