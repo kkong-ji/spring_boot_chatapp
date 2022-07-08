@@ -1,3 +1,11 @@
+const eventSource = new EventSource("http://localhost:8080/sender/ssar/receiver/cos");
+
+eventSource.onmessage = (event) => {
+    console.log(1,event);
+    const data = JSON.parse(event.data);
+    console.log(2, data);
+}
+
 function getSendMsgBox(msg){
     return `<div class="sent_msg">
     <p>${msg}</p>
