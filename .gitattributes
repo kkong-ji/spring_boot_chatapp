@@ -1,4 +1,6 @@
-chatapp/** linguist-documentation=false
-chatapp/** linguist-vendored=false 
- *.java linguist-detectable=true
- *.css linguist-detectable=false
+* linguist-vendored=false 
+*.java linguist-detectable=true
+*.js linguist-detectable=true
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+
