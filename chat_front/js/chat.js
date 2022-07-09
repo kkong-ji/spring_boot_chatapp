@@ -27,7 +27,7 @@ function initMessage(data) {
     msgInput.value = "";
 }
 
-function addMessage() {
+async function addMessage() {
     let chatBox = document.querySelector("#chat-box");
     let msgInput = document.querySelector("#chat-outgoing-msg");
 
@@ -37,12 +37,32 @@ function addMessage() {
     let date = new Date();
     let now = date.getHours() + ":" + date.getMinutes() + "|" + date.getMonth() + "/" + date.getDate();
     
+    let chat = {
+        sender: "ssar",
+        receiver: "cos",
+        msg: msgInput.value
+    };
+
+    let response = await fetch("http://localhost:8080/chat", {
+        method: "post", // http post 메서드 (새로운 데이터를 write)
+        body: JSON.stringify(chat), // JS -> JSON
+        headers: {
+            "Content-Type":"application/json; charset=utf-8"
+        }
+    });
+
+    console.log(response)
+
+    let parseResponse = await response.json();
+
+    console.log(parseResponse);
+
     chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value, now);
     chatBox.append(chatOutgoingBox);
     msgInput.value = "";
 }
 
-document.querySelector("#chat-send").addEventListener("click", ()=> {
+document.querySelector("#chat-send").addEventListener("click", () => {
     addMessage();
 });
 
