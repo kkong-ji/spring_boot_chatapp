@@ -164,9 +164,78 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
 
 public interface ChatRepository extends ReactiveMongoRepository<Chat, String> {
-
+        
+        @Tailable // 커서를 안닫고 계속 유지한다.
+        @Query("{sender:?0, receiver:?1}")
         Flux<Chat> mFindBySender(String sender, String receiver); // Flux (흐름)
 }
 ```
+
+<br>
+
+`WebFlux`
+- spring Framework 5 에서 추가된 모듈.
+- clent, server에서 reactive 스타일의 어플리케이션 개발을 도와줌.
+- 요청과 응답이 완료된 후에도 response를 유지하면서 데이터를 계속 흘려보낼 수 있음.
+
+<br>
+
+`Tailable`
+
+![image](https://user-images.githubusercontent.com/87354210/178924059-ce7bb1fb-bdd8-4b89-8795-0239f1e60e02.png)
+
+<br>
+
+> 애노테이션 @Tailable을 붙이게 되면 다음과 같이 작동한다.  
+
+1. mongoDB에 `sender : ssar`, `msg : 안녕` 이라는 데이터가 들어있다고 했을 때, 클라이언트로부터 쿼리 요청을 받음  
+
+2. Controller가 DB로부터 요청을 전달 받고 클라이언트에게 응답을 해줌    
+
+3. client는 받은 응답을 화면에 렌더링 ( `"sender : ssar", "msg : 안녕"` )  
+
+4. 또 다른 client가 데이터 한 건을 mongoDB에 save 요청 ( `"sender : ssar", "msg : 반가워"` )  
+
+5. Tailable로 커서를 열어둔 상태이므로 새로운 데이터가 들어왔을 때, 응답을 그대로 컨트롤러에 전달  
+
+6. Controller는 Flux로 계속해서 응답을 client로 흘려보냄 
+
+<br>
+
+## 5. Socket 방식
+
+<br>
+
+`Socket 방식`
+
+![image](https://user-images.githubusercontent.com/87354210/178933227-dda69dc4-c025-4421-b453-2101d2809c84.png)
+
+<br>
+
+- 서버와 클라이언트 양방향 연결이 이루어지는 통신
+- Connection이 끊어지지 않고 있기 때문에 언제든 데이터를 주고 받을 수 있음.
+
+<br>
+
+## 6. HTTP 프로토콜 vs SSE
+
+![image](https://user-images.githubusercontent.com/87354210/178928325-f0a1f109-febe-493a-adf5-cec561b3e265.png)
+
+<br>
+
+`HTTP`
+- 클라이언트의 요청이 있을 때 서버가 응답하는 단방향 통신
+- 서버가 클라이언트의 요청을 모두 받았다가 한번에 응답
+- 이 후, 연결을 종료 시킴
+
+<br>
+
+`SSE`
+- 서버의 데이터를 실시간으로 지속적으로 스트리밍 하는 기술.
+- 요청과 응답이 이루어지면 `요청(request)` 은 끊어지나 `응답(response)` 은 유지하고 있다가 다음 데이터가  
+Tailable을 통해 들어오면 서버는 flux로 데이터를 계속 받을 수 있음.  
+
+<br>
+
 
 
